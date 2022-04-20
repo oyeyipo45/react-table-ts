@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css"
 import BasicTable from './components/BasicTable';
 import SortingTable from './components/SortingTable';
 import GlobalFilteringTable from './components/FilteringTable';
-import ColumnFilteringTable from './components/FilteringTable';
+import PaginationTable from './components/PaginationTable';
  
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <Route path='/table' element={<BasicTable />} />
           <Route path='/sort-table' element={<SortingTable />} />
           <Route path='/filter-table' element={<GlobalFilteringTable />} />
-          <Route path='/column-table' element={<ColumnFilteringTable />} />
+          <Route path='/pagination-table' element={<PaginationTable />} />
         </Routes>
       </BrowserRouter>
     </div>

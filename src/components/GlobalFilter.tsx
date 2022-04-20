@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useAsyncDebounce } from 'react-table';
 
  interface IGlobalFilter {
      filter: any;
@@ -7,10 +8,15 @@ import React from 'react'
 }
 
 const GlobalFilter = ({ filter, setFilter }: IGlobalFilter) => {
+    const [value, setValue] = useState(filter)
+    const onChange = useAsyncDebounce(value => {
+        setFilter(value || undefined)
+    }, 1000)
     return (
         <span>
             Search: {' '}
-            <input value={filter || ''} onChange={(e: any) => setFilter(e.target.value)} />
+            <input value={value || ''} onChange={(e: any) => {setValue(e.target.value)
+            onChange(e.target.value)}} />
         </span>
     )
 };

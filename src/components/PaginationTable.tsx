@@ -1,21 +1,21 @@
 import React, { useMemo } from 'react';
-import { useTable, Column, useSortBy, useGlobalFilter, useFilters  } from 'react-table';
+import { useTable, Column, useSortBy, useGlobalFilter, useFilters, usePagination } from 'react-table';
 import { COLS } from './column';
 import MOCK_DATA from '../MOCK_DATA.json';
 import GlobalFilter from './GlobalFilter';
 import ColumnFilter from './ColumnFiltering';
 
-const FilteringTable = () => {
+const PaginationTable = () => {
   const columnsHeader = useMemo(() => COLS, []);
   const MockData = useMemo(() => MOCK_DATA, []);
 
-    const defaultColumn = useMemo(() => {
-        return {
-            Filter : ColumnFilter
-        }
-    }, [])
+  const defaultColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter,
+    };
+  }, []);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state, setGlobalFilter } = useTable(
+  const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow, state, setGlobalFilter } = useTable(
     {
       // @ts-ignore
       columns: columnsHeader,
@@ -24,14 +24,15 @@ const FilteringTable = () => {
     },
     useFilters,
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    usePagination
   );
-    
-  const { globalFilter, } = state
+
+  const { globalFilter } = state;
 
   return (
-      <>
-          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> 
+    <>
+      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <table {...getTableProps()} id='table'>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -40,14 +41,14 @@ const FilteringTable = () => {
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
                   <span>{column.isSorted ? (column.isSortedDesc ? '<' : '>') : ''}</span>{' '}
-                      <div>{column.canFilter ? column.render('Filter') : null }</div>
+                  <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -63,4 +64,4 @@ const FilteringTable = () => {
   );
 };
 
-export default FilteringTable;
+export default PaginationTable;
