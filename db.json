@@ -1,0 +1,16 @@
+{
+  "contacts": [
+    {
+      "name": "Damilola funmi",
+      "email": "adam45@gmail.com",
+      "contact": "3434343434343",
+      "id": 1
+    },
+    {
+      "name": "gbemi odeiyi",
+      "email": "89585545@gmail.com",
+      "contact": "99999999",
+      "id": 2
+    }
+  ]
+}
