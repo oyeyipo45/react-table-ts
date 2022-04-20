@@ -13,12 +13,17 @@ const GlobalFilter = ({ filter, setFilter }: IGlobalFilter) => {
         setFilter(value || undefined)
     }, 1000)
     return (
-        <span>
-            Search: {' '}
-            <input value={value || ''} onChange={(e: any) => {setValue(e.target.value)
-            onChange(e.target.value)}} />
-        </span>
-    )
+      <span className='center1'>
+        Global Search: {' '}
+        <input
+          value={value || ''}
+          onChange={(e: any) => {
+            setValue(e.target.value);
+            onChange(e.target.value);
+          }}
+        />
+      </span>
+    );
 };
 
 export default GlobalFilter

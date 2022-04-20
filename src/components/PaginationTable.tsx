@@ -15,7 +15,21 @@ const PaginationTable = () => {
     };
   }, []);
 
-  const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow, state, setGlobalFilter } = useTable(
+  const { getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    prepareRow,
+    pageOptions,
+    state,
+    gotoPage,
+    pageCount,
+    setGlobalFilter
+  } = useTable(
     {
       // @ts-ignore
       columns: columnsHeader,
@@ -28,7 +42,7 @@ const PaginationTable = () => {
     usePagination
   );
 
-  const { globalFilter } = state;
+  const { globalFilter, pageIndex } = state;
 
   return (
     <>
@@ -60,6 +74,25 @@ const PaginationTable = () => {
           })}
         </tbody>
       </table>
+
+      <div className='center'>
+        <span style={{ margin: '5px', padding: '4px' }}>
+          {' '}
+          {pageIndex + 1} of {pageOptions.length}{' '}
+        </span>
+        <button style={{ margin: '5px', padding: '4px' }} onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>
+        <button style={{ margin: '5px', padding: '4px' }} onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Prev
+        </button>
+        <button style={{ margin: '5px', padding: '4px' }} onClick={() => nextPage()} disabled={!canNextPage}>
+          Next
+        </button>
+        <button style={{ margin: '5px', padding: '4px' }} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>
+      </div>
     </>
   );
 };

@@ -156,3 +156,17 @@ input[type="submit"]:hover {
     background-color: #04AA6D;
     color: white;
   }
+
+  .center{
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+
+    .center1 {
+      margin: 1rem 0;
+      display: flex;
+      justify-content: center;
+      align-self: center;
+    }
